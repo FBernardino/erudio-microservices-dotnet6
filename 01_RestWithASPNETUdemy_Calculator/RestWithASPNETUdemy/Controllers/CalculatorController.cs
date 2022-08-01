@@ -21,7 +21,7 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpGet("sum/{firstNumber}/{secondNumber}")]
         public IActionResult Sum(string firstNumber, string secondNumber)
         {
-            if(IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
             {
                 var sum = ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber);
                 return Ok(sum.ToString());
@@ -30,25 +30,25 @@ namespace RestWithASPNETUdemy.Controllers
             return BadRequest("Invalid Input !");
         }
 
-        [HttpGet("sub/{firstNumber}/{secondNumber}")]
-        public IActionResult Sub(string firstNumber, string secondNumber)
+        [HttpGet("subtraction/{firstNumber}/{secondNumber}")]
+        public IActionResult Subtraction(string firstNumber, string secondNumber)
         {
-            if(IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
             {
-                var sub = ConvertToDecimal(firstNumber) - ConvertToDecimal(secondNumber);
-                return Ok(sub.ToString());
+                var subtraction = ConvertToDecimal(firstNumber) - ConvertToDecimal(secondNumber);
+                return Ok(subtraction.ToString());
             }
             return BadRequest("Invalid Input !");
         }
 
 
-        [HttpGet("mult/{firstNumber}/{secondNumber}")]
-        public IActionResult Mult(string firstNumber, string secondNumber)
+        [HttpGet("multiplication/{firstNumber}/{secondNumber}")]
+        public IActionResult Multiplication(string firstNumber, string secondNumber)
         {
             if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
             {
-                var mult = ConvertToDecimal(firstNumber) * ConvertToDecimal(secondNumber);
-                return Ok(mult.ToString());
+                var multiplication = ConvertToDecimal(firstNumber) * ConvertToDecimal(secondNumber);
+                return Ok(multiplication.ToString());
             }
             return BadRequest("Invalid Input !");
         }
@@ -58,7 +58,7 @@ namespace RestWithASPNETUdemy.Controllers
         {
             if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
             {
-                if (ConvertToDecimal(firstNumber) == 0 || ConvertToDecimal(secondNumber) == 0) 
+                if (ConvertToDecimal(firstNumber) == 0 || ConvertToDecimal(secondNumber) == 0)
                 {
                     return BadRequest("Cannot divide by zero");
                 }
@@ -69,40 +69,33 @@ namespace RestWithASPNETUdemy.Controllers
             return BadRequest("Invalid Input !");
         }
 
-        [HttpGet("aver/{firstNumber}/{secondNumber}/{thirdNumber}")]
-        public IActionResult Aver(string firstNumber, string secondNumber, string thirdNumber)
+        [HttpGet("mean/{firstNumber}/{secondNumber}/{thirdNumber}")]
+        public IActionResult Mean(string firstNumber, string secondNumber)
         {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber) && IsNumeric(thirdNumber))
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
             {
-                var aver = (ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber) + ConvertToDecimal(thirdNumber)) / 3 ;
-                return Ok(aver.ToString());
+                var mean = (ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber)) / 2;
+                return Ok(mean.ToString());
             }
             return BadRequest("Invalid Input !");
         }
 
-        [HttpGet("root/{firstNumber}")]
-        public IActionResult Root(string firstNumber)
+        [HttpGet("square-root/{firstNumber}")]
+        public IActionResult SquareRoot(string firstNumber)
         {
             if (IsNumeric(firstNumber))
             {
-                var root = Math.Sqrt(ConvertToDouble(firstNumber));
-                return Ok(root.ToString());
+                var squareRoot = Math.Sqrt((double)ConvertToDecimal(firstNumber));
+                return Ok(squareRoot.ToString());
             }
             return BadRequest("Invalid Input !");
         }
 
 
-        private double ConvertToDouble(string strNumber)
-        {
-            double doubleValue;
-            if(double.TryParse(strNumber, out doubleValue))
-            {
-                return doubleValue;
-            }
 
-            return 0;
 
-        }
+
+
 
         private bool IsNumeric(string strNumber)
         {
@@ -114,7 +107,7 @@ namespace RestWithASPNETUdemy.Controllers
         private decimal ConvertToDecimal(string strNumber)
         {
             decimal decimalValue;
-            if(decimal.TryParse(strNumber, out decimalValue))
+            if (decimal.TryParse(strNumber, out decimalValue))
             {
                 return decimalValue;
             }
